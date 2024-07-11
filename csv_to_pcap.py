@@ -38,6 +38,12 @@ def parse_arguments():
       default='false',
       help='Whether to generate flow label',
   )
+  parser.add_argument(
+      '--payload',
+      type=str,
+      default='0' * 1472,
+      help='Payload',
+  )
   return parser.parse_args()
 
 
@@ -158,8 +164,9 @@ def process_files(csv_files, pcap_files, args):
         )
         continue
 
-      packet = outer_ether / outer_ip / outer_udp
+      packet = outer_ether / outer_ip / outer_udp / args.payload
       packets.append(packet)
+
 
     writer = PcapWriter(pcap_file, append=True, sync=True)
     for pkt in packets:
