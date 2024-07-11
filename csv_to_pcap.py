@@ -205,12 +205,14 @@ def process_files(csv_files, pcap_files, args):
 
       if (
           os.path.exists(current_pcap_file)
-          and os.path.getsize(current_pcap_file) >= args.max_file_size
+          and os.path.getsize(current_pcap_file)
+          >= args.max_file_size * 1024 * 1024
       ):
         writer.close()
         print(f'PCAP file saved as {current_pcap_file}')
         part_num += 1
         writer, current_pcap_file = get_new_pcap_writer(pcap_file, part_num)
+        print(f'Processing {csv_file} -> {current_pcap_file}')
 
       writer.write(packet)
     writer.close()
