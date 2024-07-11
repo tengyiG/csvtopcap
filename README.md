@@ -13,6 +13,7 @@ This repository includes a simple script translating the csv files into pcap fil
 * flow_label: it is by default "false", if you want to generate flow label within the ipv6 headers, set it as "true", and random 20 bits of flow label will be generated within the ipv6 header.
 * eth_type_ipv4: a fixed value of 0x0800
 * eth_type_ipv6: a fixed value of 0x86DD
+* payload_size: the payload size. By defualt it is 1472 bytes, that makes the packet (l3) size 1500 bytes and framesize (l2) as 1514 bytes.
 
 # Usage
 python3 csv_to_pcap.py --csv_file my_csv1.csv my_csv2.csv --pcap_file my_pcap1.pcap my_pcap2.pcap --src_mac 22:11:33:44:55:00 --dst_mac 44:55:11:22:33:00 --flow_label true
